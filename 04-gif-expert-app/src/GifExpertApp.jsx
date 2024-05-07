@@ -1,10 +1,15 @@
 import { useState } from 'react';
+import { AddCategory } from './components/AddCategory';
 
 export const GifExpertApp = () => {
 
-    const [categories, setCategories] = useState(['One Punch', 'Samurai X', 'Dragon Ball']);
+    const [ categories, setCategories ] = useState([ 'Dragon Ball' ]);
 
-    console.log(categories)
+    const onAddCategory = ( newCategory ) => {
+      if( categories.includes(newCategory) ) return;
+      // console.log(newCategory);
+      setCategories([ newCategory, ...categories ]);
+    }
 
   return (
     <>
@@ -13,10 +18,17 @@ export const GifExpertApp = () => {
       <h1>Gif Expert App</h1>
       
       {/* Input */}
-      
+      <AddCategory 
+        // setCategories={ setCategories } 
+        onNewCategory={ onAddCategory }
+      />
+
       {/* Listado de Gifs */}
       <ol>
-        {categories.map(category => {return <li key={category}> {category} </li>})}        
+        {categories.map( category => {
+              return <li key={ category }> { category } </li>
+              })
+        }        
       </ol>
       
       {/* Gif Item */}
